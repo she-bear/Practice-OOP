@@ -95,6 +95,14 @@ public class RobotMap {
             this.point = newPoint;
         }
 
+        public void move(int step) {
+            int step_count = 1;
+            while (step_count <= step) {
+                this.move();
+                step_count++;
+            }
+        }
+
         @Override
         public String toString() {
             return point.toString() + ", [" + direction.name() + "]";
