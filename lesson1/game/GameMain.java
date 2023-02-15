@@ -27,23 +27,29 @@ public class GameMain {
           * * * * *
         */
 
-        RobotMap map = new RobotMap(5, 5);
+        RobotMap map = new RobotMap(8, 8);
+
+        // RobotMap map2 = new RobotMap(4, 4, 5);
 
         RobotMap.Robot robot = map.createRobot(new Point(2, 3));
-        System.out.println(robot); // [2, 3], [TOP]
-        robot.move();
-        robot.move();
-        robot.move();
-        robot.move();
-        robot.move();
-        System.out.println(robot); // [1, 3], [TOP]
-        robot.changeDirection(Direction.BOTTOM);
-        robot.move();
-//        robot.move(5);
-        robot.move(); // [3, 3], [BOTTOM]
-        robot.changeDirection(Direction.LEFT);
-        robot.move();
-        System.out.println(robot); // [3, 2], [LEFT]
+        RobotMap.Robot robot2 = map.createRobot(new Point(1, 3));
+        RobotMap.Robot robot3 = map.createRobot(new Point(2, 6));
+        RobotMap.Robot robot4 = map.createRobot(new Point(2, 8));
+        RobotMap.Robot robot5 = map.createRobot(new Point(3, 3));
+         System.out.println(robot); // [2, 3], [TOP]
+//         robot.move();
+//         robot.move();
+//         robot.move();
+//         robot.move();
+//         robot.move();
+//         System.out.println(robot); // [1, 3], [TOP]
+//         robot.changeDirection(Direction.BOTTOM);
+//         robot.move();
+// //        robot.move(5);
+//         robot.move(); // [3, 3], [BOTTOM]
+//         robot.changeDirection(Direction.LEFT);
+//         robot.move();
+//         System.out.println(robot); // [3, 2], [LEFT]
 
 
     }

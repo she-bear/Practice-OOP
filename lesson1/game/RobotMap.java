@@ -8,10 +8,12 @@ public class RobotMap {
     // final - после инициализации никто не может изменить переменную
     private final int n;
     private final int m;
+    private final int count;
 
     private final List<Robot> robots;
 
-    public RobotMap(int n, int m) {
+    
+    public RobotMap(int n, int m, int count) {
         // валидируем размерность карты
         if (n <= 0 || m <= 0) {
             throw new IllegalStateException("Некоректное значение параметров карты!");
@@ -19,19 +21,28 @@ public class RobotMap {
 
         this.n = n;
         this.m = m;
+        this.count = count;
         this.robots = new ArrayList<>();
+    }
+    
+    public RobotMap(int n, int m) {
+        this(n, m, 5);
     }
 
     
     public Robot createRobot(Point point) {
         validatePoint(point);
+        // проверяем, можно ли добавить робота
+        if (robots.size() == this.count) {
+            throw new IllegalStateException("Превышено допустимое количество роботов!");
+        }
         Robot robot = new Robot(point);
         robots.add(robot);
 
         return robot;
     }
 
-    
+       
     private void validatePoint(Point point) {
         validatePointIsCorrect(point);
         validatePointIsFree(point);
