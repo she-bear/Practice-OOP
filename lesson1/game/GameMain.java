@@ -27,25 +27,20 @@ public class GameMain {
           * * * * *
         */
 
-        RobotMap map = new RobotMap(5, 5);
+        RobotMap map = new RobotMap(8, 8, 3);
 
-        RobotMap.Robot robot = map.createRobot(new Point(2, 3));
-        System.out.println(robot); // [2, 3], [TOP]
-        robot.move();
-        robot.move();
-        robot.move();
-        robot.move();
-        robot.move();
-        System.out.println(robot); // [1, 3], [TOP]
-        robot.changeDirection(Direction.BOTTOM);
-        robot.move();
-//        robot.move(5);
-        robot.move(); // [3, 3], [BOTTOM]
-        robot.changeDirection(Direction.LEFT);
-        robot.move();
-        System.out.println(robot); // [3, 2], [LEFT]
+        RobotMap.Robot robot = map.createRobot(new Point(8, 8));
+        robot.move(5);
+        // перемещение состоялось
+        System.out.println(robot);
 
+        RobotMap.Robot robot_2 = map.createRobot(new Point(8, 8));
+        robot.move(6);
+        // будет встреча и exception
+        System.out.println(robot_2);
 
+        // здесь был бы exception по превышению количества роботов
+        // RobotMap.Robot robot_3 = map.createRobot(new Point(3, 3));
+        // RobotMap.Robot robot_4 = map.createRobot(new Point(6, 6));
     }
-
 }

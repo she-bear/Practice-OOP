@@ -8,25 +8,41 @@ public class RobotMap {
     // final - после инициализации никто не может изменить переменную
     private final int n;
     private final int m;
+    private final int count;
 
     private final List<Robot> robots;
 
-    public RobotMap(int n, int m) {
+    
+    public RobotMap(int n, int m, int count) {
+        // валидируем размерность карты
+        if (n <= 0 || m <= 0) {
+            throw new IllegalStateException("Некоректное значение параметров карты!");
+        }
+
         this.n = n;
         this.m = m;
+        this.count = count;
         this.robots = new ArrayList<>();
+    }
+    
+    public RobotMap(int n, int m) {
+        this(n, m, 5);
     }
 
     
     public Robot createRobot(Point point) {
         validatePoint(point);
+        // проверяем, можно ли добавить робота
+        if (robots.size() == this.count) {
+            throw new IllegalStateException("Превышено допустимое количество роботов!");
+        }
         Robot robot = new Robot(point);
         robots.add(robot);
 
         return robot;
     }
 
-    
+       
     private void validatePoint(Point point) {
         validatePointIsCorrect(point);
         validatePointIsFree(point);
@@ -77,6 +93,14 @@ public class RobotMap {
 
             System.out.println("Робот переместился с " + point + " на " + newPoint);
             this.point = newPoint;
+        }
+
+        public void move(int step) {
+            int step_count = 1;
+            while (step_count <= step) {
+                this.move();
+                step_count++;
+            }
         }
 
         @Override
