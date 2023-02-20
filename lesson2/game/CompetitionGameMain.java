@@ -30,6 +30,7 @@ public class CompetitionGameMain {
         
         Obstacle[] obstacles = createObstacles();
         Participant[] participants = createParticipants();
+        // здесь пользуемся только теми, кто имеет интерфейс Participant
         for (Participant participant : participants) {
             for (Obstacle obstacle : obstacles) {
                 // participant.overcome(obstacle)
