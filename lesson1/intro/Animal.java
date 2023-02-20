@@ -1,4 +1,4 @@
-package ru.gb.lesson1.intro;
+package lesson1.intro;
 
 public class Animal {
 

@@ -1,4 +1,4 @@
-package ru.gb.lesson1.intro;
+package lesson1.intro;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-//        incapsulation();
-//        extension();
+       encapsulation();
+       extension();
         List<Animal> animals = new ArrayList<>();
         animals.add(new Cat("cat"));
         animals.add(new Dog("dog"));
