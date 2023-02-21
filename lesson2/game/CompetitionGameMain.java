@@ -30,6 +30,7 @@ public class CompetitionGameMain {
         
         Obstacle[] obstacles = createObstacles();
         Participant[] participants = createParticipants();
+        // здесь пользуемся только теми, кто имеет интерфейс Participant
         for (Participant participant : participants) {
             for (Obstacle obstacle : obstacles) {
                 // participant.overcome(obstacle)
@@ -62,7 +63,10 @@ public class CompetitionGameMain {
                 new WallObstacleAdapter(new Wall(40)),
                 new RoadObstacleAdapter(new Road(100)),
                 new RoadObstacleAdapter(new Road(45)),
-                new SwimmingPoll(20)
+                new SwimmingPollOpstacleAdapter(new SwimmingPoll(20)),
+                new HoleOpstacleAdapter(new Hole(5)),
+                // кот не пройдет!
+                new HoleOpstacleAdapter(new Hole(35)),
         };
     }
 
@@ -70,7 +74,7 @@ public class CompetitionGameMain {
     private static Participant[] createParticipants() {
         return new Participant[] {
                 new StandardParticipant("Igor", 50, 30, 20),
-                new Cat("Murzik", 60, 25),
+                new Cat("Murzik", 60, 25, 30),
                 new Cheater("Cheater")
         };
     }
