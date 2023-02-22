@@ -1,6 +1,6 @@
 package lesson3;
 
-public class Notebook {
+public class Notebook{
     public double price;
     public int ram;
 
