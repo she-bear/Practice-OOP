@@ -1,16 +1,6 @@
 package lesson5;
 
 import java.util.*;
-import java.util.function.Consumer;
-
-class MyConsumer implements Consumer<RobotMap.Robot>{
-
-    @Override
-    public void accept(RobotMap.Robot t) {
-        System.out.println(t);
-    }
-
-}
 
 public class RobotGameMain {
     public static void main(String[] args) {
@@ -67,6 +57,21 @@ public class RobotGameMain {
             initCreateCommandHandler();
             initListCommandHandler();
             initMoveCommandHandler();
+            initExitCommandHandler();
+        }
+
+        private void initExitCommandHandler() {
+            handlers.add(new CommandHandler(){
+                @Override
+                public String name() {
+                    return "exit";
+                }
+
+                @Override
+                public void runCommand(String[] args) {
+                    System.exit(0);
+                }
+            });
         }
 
         private void initCreateCommandHandler() {
@@ -98,9 +103,7 @@ public class RobotGameMain {
 
                 @Override
                 public void runCommand(String[] args) {
-                    MyConsumer myConsumer = new MyConsumer();
-                    map.acceptRobots(myConsumer);
-                    //map.acceptRobots(System.out::println);
+                    map.acceptRobots(System.out::println);
                         //        map.acceptRobots(robot -> System.out.println(robot));
                         //        map.acceptRobots(new Consumer<RobotMap.Robot>() {
                         //            @Override
@@ -131,24 +134,6 @@ public class RobotGameMain {
 //                    } else {
 //                        System.out.println("Робот с идентификатором " + robotId + " не найден")
 //                    }
-
-          //        robot.ifPresentOrElse(new Consumer<RobotMap.Robot>() {
-          //            @Override
-          //            public void accept(RobotMap.Robot robot) {
-          //                robot.move();
-          //            }
-          //        }, new Runnable() {
-          //            @Override
-          //            public void run() {
-          //                System.out.println("Робот с идентификатором " + robotId + " не найден");
-          //            }
-          //        });
-
-          //        if (robot != null) {
-          //            robot.move();
-          //        } else {
-          //            System.out.println("Робот с идентификатором " + robotId + " не найден");
-          //        }
                 }
             });
         }
