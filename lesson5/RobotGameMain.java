@@ -38,17 +38,21 @@ public class RobotGameMain {
         //  2. Реализовать пункты 4 и 5 для действий пользователя
     }
 
+    // менеджер для обработки команд (инкапсуляция обработки команд в одном компоненте)
     private static class CommandManager {
 
         private final RobotMap map;
+        // список команд
         private final List<CommandHandler> handlers;
 
         public CommandManager(RobotMap map) {
             this.map = map;
+            // список доступных команд
             handlers = new ArrayList<>();
             initHandlers();
         }
 
+        // на каждую команду будет новый объект, который отвечает только за свою команду
         private void initHandlers() {
             initCreateCommandHandler();
             initListCommandHandler();
@@ -62,6 +66,9 @@ public class RobotGameMain {
                     return "create";
                 }
 
+                // конкретная реализация метода runCommand, объявленная в интерфейсе
+                // отвечает за запуск команды и у него есть доступ к аргументам
+                // те handlers кому аргументы не нужны - этот параметр проигнорируют
                 @Override
                 public void runCommand(String[] args) {
                     int x = Integer.parseInt(args[0]);
@@ -82,13 +89,13 @@ public class RobotGameMain {
                 @Override
                 public void runCommand(String[] args) {
                     map.acceptRobots(System.out::println);
-          //        map.acceptRobots(robot -> System.out.println(robot));
-          //        map.acceptRobots(new Consumer<RobotMap.Robot>() {
-          //            @Override
-          //            public void accept(RobotMap.Robot robot) {
-          //                System.out.println(robot);
-          //            }
-          //        });
+                        //        map.acceptRobots(robot -> System.out.println(robot));
+                        //        map.acceptRobots(new Consumer<RobotMap.Robot>() {
+                        //            @Override
+                        //            public void accept(RobotMap.Robot robot) {
+                        //                System.out.println(robot);
+                        //            }
+                        //        });
                 }
             });
         }
@@ -137,9 +144,11 @@ public class RobotGameMain {
         public void acceptCommand(String command) {
             String[] split = command.split(" ");
             String commandName = split[0];
+            // указываем, что мы копируем со split - начиная с первого аргумента и заканчивая последним (аргумент [0] - команда)
             String[] commandArgs = Arrays.copyOfRange(split, 1, split.length);
 
-            boolean found = false;
+            // по имени команды находится нужный handler и запускается
+            boolean found = false; // флаг, что команда найдена  
             for (CommandHandler handler : handlers) {
                 if (commandName.equals(handler.name())) {
                     found = true;
@@ -156,6 +165,7 @@ public class RobotGameMain {
             }
         }
 
+        // интерфейс для команд???
         private interface CommandHandler {
             String name();
             void runCommand(String[] args);
