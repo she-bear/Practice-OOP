@@ -41,6 +41,18 @@ public class RobotMap {
         return Optional.empty();
     }
 
+    public boolean deleteByID(Long id) {
+        // проверяем существование робота
+        Optional<RobotMap.Robot> robot = getById(id);
+        if (robot.isPresent()) {
+            robots.remove(robot.get());
+            return true;
+        }
+
+        return false;
+    }
+
+
     private void validatePoint(Point point) {
         validatePointIsCorrect(point);
         validatePointIsFree(point);
@@ -93,6 +105,7 @@ public class RobotMap {
             System.out.println("Робот переместился с " + point + " на " + newPoint);
             this.point = newPoint;
         }
+        
 
         @Override
         public String toString() {

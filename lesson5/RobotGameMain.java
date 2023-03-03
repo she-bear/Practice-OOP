@@ -57,6 +57,7 @@ public class RobotGameMain {
             initCreateCommandHandler();
             initListCommandHandler();
             initMoveCommandHandler();
+            initDeleteCommandHandler();
             initExitCommandHandler();
         }
 
@@ -134,6 +135,26 @@ public class RobotGameMain {
 //                    } else {
 //                        System.out.println("Робот с идентификатором " + robotId + " не найден")
 //                    }
+                }
+            });
+        }
+
+        private void initDeleteCommandHandler() {
+            handlers.add(new CommandHandler() {
+                @Override
+                public String name() {
+                    return "delete";
+                }
+
+                @Override
+                public void runCommand(String[] args) {
+                    Long robotId = Long.parseLong(args[0]);
+
+                    if (map.deleteByID(robotId)) {
+                        System.out.println("Робот с идентификатором " + robotId + " успешно удалён");
+                    } else {
+                        System.out.println("Робот с идентификатором " + robotId + " не найден");
+                    }
                 }
             });
         }
