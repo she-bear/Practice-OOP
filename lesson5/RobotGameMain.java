@@ -169,7 +169,7 @@ public class RobotGameMain {
                     // проверим, что робот существует
                     Optional<RobotMap.Robot> robot = map.getById(robotId);
                     // проверим, что задано допустимое значение DIRECTION
-                    Optional<Direction> robotDirection = Direction.ofString(args[1]);
+                    Optional<Direction> robotDirection = Direction.ofString(args[1].toUpperCase());
 
                     if (robot.isPresent() && robotDirection.isPresent()) {
                         // робот, которому будем менять направление
