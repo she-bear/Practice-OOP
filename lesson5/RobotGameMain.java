@@ -32,10 +32,6 @@ public class RobotGameMain {
             String command = sc.nextLine();
             manager.acceptCommand(command);
         }
-
-        // TODO: 24.02.2023 Домашнее задание:
-        //  1. Разобраться с проектом
-        //  2. Реализовать пункты 4 и 5 для действий пользователя
     }
 
     // менеджер для обработки команд (инкапсуляция обработки команд в одном компоненте)
@@ -57,6 +53,7 @@ public class RobotGameMain {
             initCreateCommandHandler();
             initListCommandHandler();
             initMoveCommandHandler();
+            initChangeDirCommandHandler();
             initDeleteCommandHandler();
             initExitCommandHandler();
         }
@@ -154,6 +151,36 @@ public class RobotGameMain {
                         System.out.println("Робот с идентификатором " + robotId + " успешно удалён");
                     } else {
                         System.out.println("Робот с идентификатором " + robotId + " не найден");
+                    }
+                }
+            });
+        }
+
+        private void initChangeDirCommandHandler() {
+            handlers.add(new CommandHandler() {
+                @Override
+                public String name() {
+                    return "changedir";
+                }
+
+                @Override
+                public void runCommand(String[] args) {
+                    Long robotId = Long.parseLong(args[0]);
+                    // проверим, что робот существует
+                    Optional<RobotMap.Robot> robot = map.getById(robotId);
+                    // проверим, что задано допустимое значение DIRECTION
+                    Optional<Direction> robotDirection = Direction.ofString(args[1]);
+
+                    if (robot.isPresent() && robotDirection.isPresent()) {
+                        // робот, которому будем менять направление
+                        RobotMap.Robot value = robot.get();
+                        value.changeDirection(robotDirection.get());
+
+                        System.out.println("Робот с идентификатором " + robotId + " успешно изменил направление на " + robotDirection.get());
+                    } else if (robot.isEmpty()) {
+                        System.out.println("Робот с идентификатором " + robotId + " не найден");
+                    } else {
+                        System.out.println("Введено неверное значение DIRECTION");
                     }
                 }
             });
